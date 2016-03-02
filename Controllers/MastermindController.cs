@@ -72,6 +72,10 @@ namespace Mastermind.Controllers
                 game.End = DateTime.Now;
                 _context.Games.Update(game);
                 _context.SaveChanges();
+            }else {
+                game.trialsNumber++;
+                _context.Games.Update(game);
+                _context.SaveChanges();
             }
             
             string[] myNewList = new string[result.Count];
@@ -87,6 +91,21 @@ namespace Mastermind.Controllers
         public string[] GetColors(string player)
         {
             return Enum.GetNames(typeof(GameProcessor.CodepegColors));
+        }
+        
+        [HttpGet("Scors")]
+        public List<Score> GetScors()
+        {
+            List<string> players = _context.Games.Select(p => p.PlayerName).Distinct().ToList();
+            List<Score> scores = new List<Score>();
+            GameProcessor gameProcessor = new GameProcessor();
+            
+            foreach (var player in players)
+            {
+                scores.Add(gameProcessor.GetScore(_context, player));
+            }
+            
+            return scores.OrderByDescending(s=>s.trialsNumberAverage).ToList();
         }
     }
 }

@@ -23,6 +23,8 @@ namespace Mastermind.Models
         public DateTime Start {get; set;}
         
         public DateTime End {get; set;}
+        
+        public int trialsNumber {get; set;}
     }
     
     public class Codepeg 
@@ -32,5 +34,14 @@ namespace Mastermind.Models
         public int Location {get; set;}
         
         public string Color {get; set;}
+    }
+    
+    public class Score
+    {
+        public string player { get; set; }
+        
+        public double trialsNumberAverage { get; set; }
+        
+        public int finishedGames { get; set; }
     }
 };
