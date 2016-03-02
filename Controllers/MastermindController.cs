@@ -1,7 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Mastermind.BP;
 using Mastermind.Models;
 using Microsoft.AspNet.Mvc;
+using Microsoft.Data.Entity;
 
 namespace Mastermind.Controllers
 {
@@ -15,11 +18,11 @@ namespace Mastermind.Controllers
             _context = context;
         }
         
-        [HttpGet("{player}")]
+        [HttpGet("newGame/{player}")]
         public Guid Get(string player)
         {
             if(String.IsNullOrEmpty(player)){
-                throw new ArgumentException("Veuillez votre pseudo");
+                throw new ArgumentException("Veuillez spécifier votre pseudo");
             }
             
             var Token = Guid.NewGuid(); 
@@ -36,6 +39,54 @@ namespace Mastermind.Controllers
             _context.SaveChanges();                        
 
             return Token;
+        }
+        
+       [HttpPost("Result/")]
+        public string[] GetResult(Guid token, List<string> guess)
+        {
+
+            if(token == null || token == Guid.Empty){
+                throw new ArgumentException("Veuillez spécifier votre token");
+            }
+            
+            if(guess == null || guess.Count == 0){
+                throw new ArgumentException("Veuillez spécifier votre proposition");
+            }
+            
+            List<Codepeg> codepegs = new List<Codepeg>();
+            for (int i = 0; i < guess.Count; i++)
+            {
+                codepegs.Add(new Codepeg{
+                    Location = i,
+                    Color = guess[i]
+                });
+            }
+           
+            Game game = _context.Games.Include(g => g.Shield).Where(g=> g.Token == token).FirstOrDefault();                      
+            GameProcessor gameProcessor = new GameProcessor();            
+            List<GameProcessor.KeyPeg> result =  gameProcessor.getFeedback(codepegs, game.Shield);
+                                  
+            
+            if(gameProcessor.IsShieldBroken(result))
+            {
+                game.End = DateTime.Now;
+                _context.Games.Update(game);
+                _context.SaveChanges();
+            }
+            
+            string[] myNewList = new string[result.Count];
+            for (int i = 0; i < result.Count; i++)
+            {
+                myNewList[i] = result[i].ToString();
+            }
+            
+            return myNewList;
+        }
+        
+        [HttpGet("ListColors/")]
+        public string[] GetColors(string player)
+        {
+            return Enum.GetNames(typeof(GameProcessor.CodepegColors));
         }
     }
 }

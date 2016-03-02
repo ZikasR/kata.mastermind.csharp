@@ -1,14 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Mastermind.Models;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Data.Entity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Mastermind.Models;
 
 namespace Mastermind
 {
@@ -31,7 +27,9 @@ namespace Mastermind
             // Add framework services.
             services.AddMvc();
             
-            var connection = @"Server=tcp:x4gz4alp6f.database.windows.net,1433;Database=mastermindDojo;User ID=FRDG_USER@x4gz4alp6f;Password=vvK,3~GUtDJg<z.?R^k;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;";
+            //var connection = @"Server=tcp:x4gz4alp6f.database.windows.net,1433;Database=mastermindDojo;User ID=FRDG_USER@x4gz4alp6f;Password=vvK,3~GUtDJg<z.?R^k;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;";
+
+            var connection = @"Server=.\SQLEXPRESS;Database=Mastermind;Trusted_Connection=True;";
             
             services.AddEntityFramework()
                 .AddSqlServer()
