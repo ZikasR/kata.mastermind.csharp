@@ -23,7 +23,7 @@
             <tr>
                 <th>Joueur</th>
                 <th>Nombre d'essai moyen</th>
-                <th>Nombre total de combinaison d'ecrypté</th>
+                <th>Nombre total de combinaisons décryptées</th>
             </tr> 
             <tr ng-repeat="score in scores | filter : {trialsNumberAverage : '!0'} | orderBy : 'trialsNumberAverage'" ng-class="$index == 0 ? 'success' : 'warning'">
                 <td>{{score.player}}</td>
@@ -36,7 +36,7 @@
         <table class="table table-bordered">
             <tr>
                 <th>Joueur</th>
-                <th>Nombre total de combinaison d'ecrypté</th>
+                <th>Nombre total de combinaisons décryptées</th>
             </tr> 
             <tr ng-repeat="score in scores | filter : {trialsNumberAverage : '0'}" class="danger">
                 <td>{{score.player}}</td>
