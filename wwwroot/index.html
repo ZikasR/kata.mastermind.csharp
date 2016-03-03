@@ -5,9 +5,9 @@
     <title>BookTask, Parce que le temps est précieux.</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-    <script src="./angula.min.js"></script>     
-    <script src="./app.js"></script>     
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="angular.min.js"></script>     
+    <script src="app.js"></script>     
 </head>
 <body class="page-container">
     <header>
@@ -18,7 +18,31 @@
         </div>
     </header>
     <div class="container" ng-app="app"  ng-controller="mastermindController">
-        {{title}}
+        <h2>Scores</h2>
+        <table class="table table-bordered">
+            <tr>
+                <th>Joueur</th>
+                <th>Nombre d'essai moyen</th>
+                <th>Nombre total de combinaison d'ecrypté</th>
+            </tr> 
+            <tr ng-repeat="score in scores | filter : {trialsNumberAverage : '!0'} | orderBy : 'trialsNumberAverage'" ng-class="$index == 0 ? 'success' : 'warning'">
+                <td>{{score.player}}</td>
+                <td>{{score.trialsNumberAverage}}</td>
+                <td>{{score.finishedGames}}</td>
+            </tr>            
+        </table>
+        
+        <h2>List des joueurs</h2>
+        <table class="table table-bordered">
+            <tr>
+                <th>Joueur</th>
+                <th>Nombre total de combinaison d'ecrypté</th>
+            </tr> 
+            <tr ng-repeat="score in scores | filter : {trialsNumberAverage : '0'}" class="danger">
+                <td>{{score.player}}</td>
+                <td>{{score.finishedGames}}</td>
+            </tr>            
+        </table>
     </div
     <hr />
     <footer>
