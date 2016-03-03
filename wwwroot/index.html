@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>BookTask, Parce que le temps est précieux.</title>
+    <title>DOJO AXA Mastermind</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap.min.css">
     <script src="angular.min.js"></script>     
     <script src="app.js"></script>     
 </head>
@@ -13,19 +13,23 @@
     <header>
         <div class="layout_logo">
             <div class="container">
-                <h1>AXA Mastermind</h1>
+                <h1>DOJO AXA Mastermind</h1>
             </div>
         </div>
     </header>
     <div class="container" ng-app="app"  ng-controller="mastermindController">
         <h2>Scores</h2>
         <table class="table table-bordered">
-            <tr>
+            <thead>
+            <tr class="text-center">
+                <th>#</th>
                 <th>Joueur</th>
                 <th>Nombre d'essai moyen</th>
                 <th>Nombre total de combinaisons décryptées</th>
             </tr> 
+            </thead>
             <tr ng-repeat="score in scores | filter : {trialsNumberAverage : '!0'} | orderBy : 'trialsNumberAverage'" ng-class="$index == 0 ? 'success' : 'warning'">
+                <td>{{$index + 1}}</td>
                 <td>{{score.player}}</td>
                 <td>{{score.trialsNumberAverage}}</td>
                 <td>{{score.finishedGames}}</td>
@@ -34,15 +38,25 @@
         
         <h2>List des joueurs</h2>
         <table class="table table-bordered">
+            <thead class="text-center">
             <tr>
                 <th>Joueur</th>
                 <th>Nombre total de combinaisons décryptées</th>
             </tr> 
+            </thead>
             <tr ng-repeat="score in scores | filter : {trialsNumberAverage : '0'}" class="danger">
                 <td>{{score.player}}</td>
                 <td>{{score.finishedGames}}</td>
             </tr>            
         </table>
+        
+       <p>
+            <span>Steps : <a href="./steps.html">Go GO GO</a> </span> <br/><br/>
+             <span>Colors List : GET : http://uc399925:5555/api/mastermind/ListColors/</span><br/><br/>
+            <span>Download feature file : <a href="./mastermind.feature">clique droit save ?!</a> </span><br/><br/>
+            <span>Start new game : GET :  http://uc399925:5555/api/mastermind/newGame/<b>{your name}</b></span><br/><br/>
+            <span>Result : POST : http://uc399925:5555/api/mastermind/Result/</span><br/><br/>
+        </p>
     </div
     <hr />
     <footer>

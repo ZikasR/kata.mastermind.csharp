@@ -34,6 +34,10 @@ namespace Mastermind.BP
         public List<KeyPeg> getFeedback(List<Codepeg> codepegs, List<Codepeg> pattern)
         {
             List<GameProcessor.KeyPeg> keyPegs = new List<GameProcessor.KeyPeg>();
+
+            for(int i = 0; i < codepegs.Count; i++){
+               keyPegs.Add(GameProcessor.KeyPeg.Empty);
+            }
             
             // deep copy oO
             var deserializeSettings = new JsonSerializerSettings {ObjectCreationHandling = ObjectCreationHandling.Replace};
@@ -45,21 +49,20 @@ namespace Mastermind.BP
                 if (codepegs[i].Location == patternTmp[i].Location && codepegs[i].Color == patternTmp[i].Color)
                 {
                     patternTmp[i].Color = CodepegColors.Empty.ToString();
-                    keyPegs.Add(GameProcessor.KeyPeg.Black);
-                    continue;
+                    keyPegs[i] =  GameProcessor.KeyPeg.Black;
                 }
-                                                
+         
+            }           
+            
+            for(int i = 0; i < codepegs.Count; i++){
                 // Same color not same location
                 var exists = patternTmp.Any(p => p.Color == codepegs[i].Color); 
-                if(exists){
-                    var location = patternTmp.Where(p => p.Color == codepegs[i].Color).FirstOrDefault().Location;
-                    patternTmp[location].Color = CodepegColors.Empty.ToString();
-                    keyPegs.Add(GameProcessor.KeyPeg.White);
-                    continue;
+                if(exists &&  keyPegs[i] != GameProcessor.KeyPeg.Black){
+                    keyPegs[i] =  GameProcessor.KeyPeg.White;
                 }
-                
-                keyPegs.Add(GameProcessor.KeyPeg.Empty);
             }
+            
+
             
             return keyPegs;
         }

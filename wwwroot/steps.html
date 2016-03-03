@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>DOJO AXA Mastermind</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="angular.min.js"></script>     
+    <script src="app.js"></script>     
+</head>
+<body class="page-container">
+    <header>
+        <div class="layout_logo">
+            <div class="container">
+                <h1>DOJO AXA Mastermind</h1>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <code><pre>
+<p>Feature: Mastermind</p> 
+
+<p>As a Codebreaker  <br /> 
+I want to guess the pattern  <br /> 
+So that I break the shield.</p> 
+
+  <p>Scenario Outline: Get Result case   <br />  
+    Given The pattern is  <pattern><br /> 
+     When My guess equals <guess><br /> 
+    Then the result equals <result><br /> 
+      And the shield is <boken> broken</p> 
+ <p>   Examples: <br />  
+      | case | pattern                        | guess                          | result                       | broken | <br /> 
+      | 1    | [White, Green, Yellow, Yellow] | [White, Green, Yellow, Yellow] | [Black, Black, Black, Black] |        | <br /> 
+      | 2    | [White, Green, Yellow, Yellow] | [Black, Red, Blue, Black]      | [Empty, Empty, Empty, Empty] | not    | <br /> 
+      | 3    | [White, Green, Yellow, Yellow] | [Green, Green, White, Yellow]  | [Empty, Black, White, Black] | not    | <br /> 
+      | 4    | [White, Green, Yellow, Yellow] | [Blue, Green, Yellow, Green]   | [Empty, Black, Black, Empty] | not    | <br /> 
+      | 5    | [White, Green, Yellow, Yellow] | [Blue, Green, Yellow, Green]   | [Empty, Black, Black, Empty] | not    | <br /> 
+      | 6    | [White, Green, Yellow, Yellow] | [Yellow, Green, Yellow, White] | [White, Black, Black, White] | not    | <br /> 
+      | 7    | [Red, Blue, Red, Red]          | [Blue, Black, Red, Blue]       | [White, Empty, Black, White] | not    | </p> 
+        </pre></code>
+    </div
+    <hr />
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p></p>
+            </div>
+        </div>
+    </footer>
+
+
+</body>
+</html>
