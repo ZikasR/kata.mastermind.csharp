@@ -13,7 +13,7 @@ namespace Mastermind.BP
             List<Codepeg> shield = new List<Codepeg>();
             Random random = new Random();
                          
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 8; i++)
             {                
                 CodepegColors randomCodepegColor = GetRandomCodepegColor(random);
                 
@@ -35,7 +35,7 @@ namespace Mastermind.BP
         {
             List<GameProcessor.KeyPeg> keyPegs = new List<GameProcessor.KeyPeg>();
 
-            for(int i = 0; i < codepegs.Count; i++){
+            for(int i = 0; i < pattern.Count; i++){
                keyPegs.Add(GameProcessor.KeyPeg.Empty);
             }
             

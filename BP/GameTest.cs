@@ -107,6 +107,9 @@ namespace Mastermind.BP
             List<GameProcessor.KeyPeg> keyPegs = new List<GameProcessor.KeyPeg>();
             
             keyPegs.Add(GameProcessor.KeyPeg.Empty);
+            keyPegs.Add(GameProcessor.KeyPeg.Empty);
+            keyPegs.Add(GameProcessor.KeyPeg.Empty);
+            keyPegs.Add(GameProcessor.KeyPeg.Empty);
             
             Assert.Equal(result, keyPegs);
         }
@@ -167,6 +170,9 @@ namespace Mastermind.BP
             List<GameProcessor.KeyPeg> keyPegs = new List<GameProcessor.KeyPeg>();
             
             keyPegs.Add(GameProcessor.KeyPeg.White);
+            keyPegs.Add(GameProcessor.KeyPeg.Empty);
+            keyPegs.Add(GameProcessor.KeyPeg.Empty);
+            keyPegs.Add(GameProcessor.KeyPeg.Empty);
             
             Assert.Equal(result, keyPegs);
         }
@@ -329,6 +335,73 @@ namespace Mastermind.BP
             keyPegs.Add(GameProcessor.KeyPeg.Empty);
             keyPegs.Add(GameProcessor.KeyPeg.Black);
             keyPegs.Add(GameProcessor.KeyPeg.White);
+            
+            Assert.Equal(result, keyPegs);
+        }
+        
+        [Fact]
+        public void getFeedback_should_return_expected_result_4()
+        {
+            GameProcessor gameProcessor = new GameProcessor();
+            
+            pattern[0].Color = "Red";
+            pattern[1].Color = "Blue";
+            pattern[2].Color = "Red";
+            pattern[3].Color = "Red";
+             pattern.Add(new Codepeg{
+                Location = 4,
+                Color = "White"
+            });
+            
+            pattern.Add(new Codepeg{
+                Location = 5,
+                Color = "Green"
+            });
+            
+            pattern.Add(new Codepeg{
+                Location = 6,
+                Color = "Yellow"
+            });
+            
+            pattern.Add(new Codepeg{
+                Location = 7,
+                Color = "Yellow"
+            });
+            
+            List<Codepeg> codepegs = new List<Codepeg>(4);
+
+            codepegs.Add(new Codepeg{
+                Location = 0,
+                Color = "Blue"
+            });
+            
+            codepegs.Add(new Codepeg{
+                Location = 1,
+                Color = "Black"
+            }); 
+            
+            codepegs.Add(new Codepeg{
+                Location = 2,
+                Color = "Red"
+            }); 
+            
+            codepegs.Add(new Codepeg{
+                Location = 3,
+                Color = "Blue"
+            });   
+
+            List<GameProcessor.KeyPeg> result  = gameProcessor.getFeedback(codepegs, pattern);
+            
+            List<GameProcessor.KeyPeg> keyPegs = new List<GameProcessor.KeyPeg>();
+            
+            keyPegs.Add(GameProcessor.KeyPeg.White);
+            keyPegs.Add(GameProcessor.KeyPeg.Empty);
+            keyPegs.Add(GameProcessor.KeyPeg.Black);
+            keyPegs.Add(GameProcessor.KeyPeg.White);
+            keyPegs.Add(GameProcessor.KeyPeg.Empty);
+            keyPegs.Add(GameProcessor.KeyPeg.Empty);
+            keyPegs.Add(GameProcessor.KeyPeg.Empty);
+            keyPegs.Add(GameProcessor.KeyPeg.Empty);
             
             Assert.Equal(result, keyPegs);
         }
