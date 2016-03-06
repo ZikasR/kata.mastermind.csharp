@@ -9,5 +9,9 @@ namespace Codebreaker
             Console.WriteLine("Hello World");
             Console.Read();
         }
+        
+        public Guid createNewGame(){
+            return new Guid();
+        }
     }
 }

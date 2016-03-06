@@ -20,7 +20,8 @@
   },
 
   "commands": {
-    "run": "Codebreacker"
+    "run": "Codebreacker",
+    "test": "xunit.runner.dnx"
   },
 
   "frameworks": {
